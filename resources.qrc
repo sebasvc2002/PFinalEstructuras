@@ -1,0 +1,13 @@
+<RCC>
+  <qresource prefix="Fotos">
+    <file>resources png/Anahuac Mayab Logo 2.png</file>
+    <file>resources png/catalog.png</file>
+    <file>resources png/close.png</file>
+    <file>resources png/demography.png</file>
+    <file>resources png/group.png</file>
+    <file>resources png/history.png</file>
+    <file>resources png/home.png</file>
+    <file>resources png/tree.png</file>
+    <file>resources png/wait.png</file>
+  </qresource>
+</RCC>
