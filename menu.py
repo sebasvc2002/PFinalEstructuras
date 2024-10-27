@@ -145,7 +145,7 @@ class Ui_MainWindow(object):
         self.menuPrincipal.setMinimumSize(QSize(550, 560))
         self.menuPrincipal.setMaximumSize(QSize(550, 560))
         self.menuPrincipal.setAutoFillBackground(False)
-        self.menuPrincipal.setStyleSheet(u"background-color:rgb(32,32,32);\n")
+        self.menuPrincipal.setStyleSheet(u"background-color:rgb(12,12,12);\n")
         self.splitter = QSplitter(self.menuPrincipal)
         self.splitter.setObjectName(u"splitter")
         self.splitter.setGeometry(QRect(0, 0, 551, 560))

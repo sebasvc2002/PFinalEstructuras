@@ -1,3 +1,4 @@
+from PySide6.QtGui import QColor, QPalette
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox,QComboBox
 from PySide6.QtCore import Qt
 
@@ -21,15 +22,21 @@ class RecientesWidget(QWidget):
         self._tipoAccion.addItem("Check-in")
         self._tipoAccion.addItem("Check-out")
         self._tipoAccion.addItem("Perdido")
+        self._tipoAccion.addItem("Dañado")
+        self._tipoAccion.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;min-height: 40px;font-size: 15px;")
         self.layout.addWidget(self._tipoAccion)
         self.btn_agregar = QPushButton("Agregar Libro")
+        self.btn_agregar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;")
         self.btn_agregar.clicked.connect(self.agregar_accion)
         self.layout.addWidget(self.btn_agregar)
         self.btn_eliminar = QPushButton("Eliminar acción más reciente")
+        self.btn_eliminar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;")
         self.btn_eliminar.clicked.connect(self.borrar_accion)
         self.layout.addWidget(self.btn_eliminar)
         # Crear lista gráfica
         self.Pila_Libros = QListWidget()
+        self.Pila_Libros.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;max-height: 350px;font-size: 15px;")
+
         self.layout.addWidget(self.Pila_Libros)
 
 
@@ -39,7 +46,6 @@ class RecientesWidget(QWidget):
     def actualizar_lista(self):
         """Actualiza la lista gráfica de libros en la interfaz"""
         self.Pila_Libros.clear()
-        QMessageBox.about(self, "Mensaje", "Acción realizada con éxito.")
         for libro in self.acciones:
             self.Pila_Libros.addItem(f"{libro['titulo']} - ISBN: {libro['isbn']} - {libro['accion']}")
 
