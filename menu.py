@@ -36,7 +36,7 @@ class Ui_MainWindow(object):
         self.barraMenu = QWidget(self.centralwidget)
         self.barraMenu.setObjectName(u"barraMenu")
         self.barraMenu.setGeometry(QRect(10, 0, 231, 560))
-        self.barraMenu.setMinimumSize(QSize(0, 0))
+        self.barraMenu.setMinimumSize(QSize(0, 0))|
         self.barraMenu.setAutoFillBackground(False)
         self.barraMenu.setStyleSheet(u"QWidget{\n"
 "background-color: rgb(255,89 ,0 );\n"

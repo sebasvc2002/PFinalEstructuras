@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox
 from PySide6.QtCore import Qt
+import numpy as np
 
 
 class CatalogoWidget(QWidget):
@@ -14,22 +15,28 @@ class CatalogoWidget(QWidget):
         # Configuración de layout
         self.layout = QVBoxLayout()
 
-        # Crear lista gráfica
-        self.lista_libros = QListWidget()
-        self.layout.addWidget(self.lista_libros)
+
 
         # Botones
         self.btn_agregar = QPushButton("Agregar Libro")
         self.btn_agregar.clicked.connect(self.agregar_libro)
+        self.btn_agregar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 30px;")
         self.layout.addWidget(self.btn_agregar)
 
         self.btn_eliminar = QPushButton("Eliminar Libro")
         self.btn_eliminar.clicked.connect(self.eliminar_libro)
+        self.btn_eliminar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 30px;")
         self.layout.addWidget(self.btn_eliminar)
 
         self.btn_ordenar = QPushButton("Ordenar por ISBN")
         self.btn_ordenar.clicked.connect(self.ordenar_libros)
+        self.btn_ordenar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 30px;")
         self.layout.addWidget(self.btn_ordenar)
+
+        # Crear lista gráfica
+        self.lista_libros = QListWidget()
+        self.lista_libros.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;max-height: 350px;font-size: 15px;")
+        self.layout.addWidget(self.lista_libros)
 
         # Configuración de layout
         self.setLayout(self.layout)
@@ -39,6 +46,7 @@ class CatalogoWidget(QWidget):
         self.lista_libros.clear()
         for libro in self.libros:
             self.lista_libros.addItem(f"{libro['titulo']} - ISBN: {libro['isbn']}")
+            print(self.libros)
 
     def agregar_libro(self):
         """Agrega un libro a la lista"""
