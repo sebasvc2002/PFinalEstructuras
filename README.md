@@ -1,6 +1,6 @@
 Using PySide6
 
-Catálogo - Arreglos, ordenamiento
+Catálogo - Arreglos, ordenamiento (terminado)
 
 Entregas recientes - pilas
 

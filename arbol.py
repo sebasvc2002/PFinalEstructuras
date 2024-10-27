@@ -15,7 +15,7 @@ class ArbolBinarioWidget(QWidget):
     def __init__(self):
         super().__init__()
         self.setFixedSize(500, 500)
-        self.tree_root = None  # Root of the binary tree
+        self.raiz_arbol = None  # Root of the binary tree
 
         # Layouts and Widgets
         self.layout = QVBoxLayout()
@@ -25,12 +25,12 @@ class ArbolBinarioWidget(QWidget):
         self.input_field.setPlaceholderText("Introduce valor")
 
         # Buttons for actions
-        self.add_button = QPushButton("Añadir nodo")
-        self.delete_button = QPushButton("Borrar nodo")
-        self.preorder_button = QPushButton("Preorden")
-        self.inorder_button = QPushButton("Inorden")
-        self.postorder_button = QPushButton("Postorden")
-        self.result_label = QLabel("Traversal Result: ")
+        self.bAgregar = QPushButton("Añadir nodo")
+        self.BEliminar = QPushButton("Borrar nodo")
+        self.BPreorden = QPushButton("Preorden")
+        self.BInorden = QPushButton("Inorden")
+        self.bPostorden = QPushButton("Postorden")
+        self.resultado_label = QLabel("Resultado: ")
 
         # Tree visualization
         self.scene = QGraphicsScene()
@@ -38,20 +38,20 @@ class ArbolBinarioWidget(QWidget):
         self.graphics_view.setRenderHint(QPainter.Antialiasing)
 
         # Connect buttons
-        self.add_button.clicked.connect(self.nuevo_nodo)
-        self.delete_button.clicked.connect(self.borrar_nodo)
-        self.preorder_button.clicked.connect(self.rPreorden)
-        self.inorder_button.clicked.connect(self.rInorden)
-        self.postorder_button.clicked.connect(self.rPostorden)
+        self.bAgregar.clicked.connect(self.nuevo_nodo)
+        self.BEliminar.clicked.connect(self.borrar_nodo)
+        self.BPreorden.clicked.connect(self.rPreorden)
+        self.BInorden.clicked.connect(self.rInorden)
+        self.bPostorden.clicked.connect(self.rPostorden)
 
         # Assemble layout
         self.layout.addWidget(self.input_field)
-        self.layout.addWidget(self.add_button)
-        self.layout.addWidget(self.delete_button)
-        self.layout.addWidget(self.preorder_button)
-        self.layout.addWidget(self.inorder_button)
-        self.layout.addWidget(self.postorder_button)
-        self.layout.addWidget(self.result_label)
+        self.layout.addWidget(self.bAgregar)
+        self.layout.addWidget(self.BEliminar)
+        self.layout.addWidget(self.BPreorden)
+        self.layout.addWidget(self.BInorden)
+        self.layout.addWidget(self.bPostorden)
+        self.layout.addWidget(self.resultado_label)
         self.layout.addWidget(self.graphics_view)
 
         self.setLayout(self.layout)
@@ -61,7 +61,7 @@ class ArbolBinarioWidget(QWidget):
         if value:
             try:
             # Insert the node
-                self.tree_root = self._insertar(self.tree_root, float(value))
+                self.raiz_arbol = self._insertar(self.raiz_arbol, float(value))
                 self.input_field.clear()
                 self.refresh_Arbol()
             except ValueError:
@@ -72,31 +72,32 @@ class ArbolBinarioWidget(QWidget):
         value = self.input_field.text().strip()
         if value:
             # Delete the node
-            self.tree_root = self._delete(self.tree_root, float(value))
+            self.raiz_arbol = self._borrar(self.raiz_arbol, float(value))
             self.input_field.clear()
             self.refresh_Arbol()
 
     def rPreorden(self):
-        result = self._preorder(self.tree_root)
-        self.result_label.setText(f"Resultado: {result}")
+        resultado = self._preorder(self.raiz_arbol)
+        self.resultado_label.setText(f"Resultado: {resultado}")
 
     def rInorden(self):
-        result = self._inorden(self.tree_root)
-        self.result_label.setText(f"Resultado:: {result}")
+        resultado = self._inorden(self.raiz_arbol)
+        self.resultado_label.setText(f"Resultado:: {resultado}")
 
     def rPostorden(self):
-        result = self._postorden(self.tree_root)
-        self.result_label.setText(f"Resultado:: {result}")
+        resultado = self._postorden(self.raiz_arbol)
+        self.resultado_label.setText(f"Resultado:: {resultado}")
     def show_error(self):
         # Crear un mensaje emergente
         msg = QMessageBox()
         msg.setWindowTitle("Error")
-        msg.setText("¡Inserta solamente números!")
+        print("Error")
+        msg.setText("Inserta solamente números")
         msg.setIcon(QMessageBox.Information)
         msg.setStandardButtons(QMessageBox.Ok)
         msg.exec_()
 
-    # Tree operations
+    # Métodos del árbol binario
     def _insertar(self, node, value):
         if node is None:
             return NodoArbol(value)
@@ -106,29 +107,28 @@ class ArbolBinarioWidget(QWidget):
             node.right = self._insertar(node.right, value)
         return node
 
-    def _delete(self, node, value):
+    def _borrar(self, node, value):
         if node is None:
             return node
         if value < node.value:
-            node.left = self._delete(node.left, value)
+            node.left = self._borrar(node.left, value)
         elif value > node.value:
-            node.right = self._delete(node.right, value)
+            node.right = self._borrar(node.right, value)
         else:
-            # Node to delete found
             if node.left is None:
                 return node.right
             elif node.right is None:
                 return node.left
             temp = self._nodo_min_valor(node.right)
             node.value = temp.value
-            node.right = self._delete(node.right, temp.value)
+            node.right = self._borrar(node.right, temp.value)
         return node
 
     def _nodo_min_valor(self, node):
-        current = node
-        while current.left is not None:
-            current = current.left
-        return current
+        actual = node
+        while actual.left is not None:
+            actual = actual.left
+        return actual
 
     def _preorder(self, node):
         if node:
@@ -147,13 +147,13 @@ class ArbolBinarioWidget(QWidget):
 
     def refresh_Arbol(self):
         self.scene.clear()
-        self._dibujar_Arbol(self.tree_root, 250, 50, 120)
+        self._dibujar_Arbol(self.raiz_arbol, 250, 50, 120)
 
     def _dibujar_Arbol(self, node, x, y, x_offset):
         if node:
             # Draw the node as a circle with a value label
             node_item = QGraphicsEllipseItem(x - 15, y - 15, 30, 30)
-            node_item.setBrush(Qt.gray)
+            node_item.setBrush(Qt.green)
             self.scene.addItem(node_item)
 
             # Add the node's value as text inside the circle
