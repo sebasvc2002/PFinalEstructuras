@@ -39,21 +39,21 @@ class Ui_MainWindow(object):
         self.barraMenu.setMinimumSize(QSize(0, 0))
         self.barraMenu.setAutoFillBackground(False)
         self.barraMenu.setStyleSheet(u"QWidget{\n"
-"background-color: rgb(255,89 ,0 );\n"
-"}\n"
-"QPushButton{\n"
-"color:white; \n"
-"text-align:left;\n"
-"height:45px;\n"
-"border-radius: 10px;\n"
-"border-style: outset;\n"
-"border-width: 1px;\n"
-"border-color: white;\n"
-"padding: 5px;\n"
-"}\n"
-"QPushButton:checked{\n"
-"background-color: rgb(255, 255, 255);\n"
-"color: rgb(238, 92, 2);\n}}")
+        "background-color: rgb(255,89 ,0 );\n"
+        "}\n"
+        "QPushButton{\n"
+        "color:white; \n"
+        "text-align:left;\n"
+        "height:45px;\n"
+        "border-radius: 10px;\n"
+        "border-style: none;\n"
+        "border-width: 1px;\n"
+        "border-color: white;\n"
+        "padding: 5px;\n"
+        "}\n"
+        "QPushButton:checked{\n"
+        "background-color: rgb(255, 255, 255);\n"
+        "color: rgb(238, 92, 2);\n}QPushButton:hover{background-color: rgb(255, 255, 255);color: rgb(238, 92, 2);}")
         self.layoutWidget = QWidget(self.barraMenu)
         self.layoutWidget.setObjectName(u"layoutWidget")
         self.layoutWidget.setGeometry(QRect(20, 70, 190, 450))
