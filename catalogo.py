@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox
 from PySide6.QtCore import Qt
+import numpy as np
 
 
 class CatalogoWidget(QWidget):
@@ -45,6 +46,7 @@ class CatalogoWidget(QWidget):
         self.lista_libros.clear()
         for libro in self.libros:
             self.lista_libros.addItem(f"{libro['titulo']} - ISBN: {libro['isbn']}")
+            print(self.libros)
 
     def agregar_libro(self):
         """Agrega un libro a la lista"""
