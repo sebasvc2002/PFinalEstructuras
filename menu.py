@@ -20,15 +20,17 @@ from PySide6.QtWidgets import (QApplication, QLabel, QMainWindow, QMenuBar,
     QStatusBar, QVBoxLayout, QWidget)
 import resources_rc
 from arbol import ArbolBinarioWidget
+from catalogo import CatalogoWidget
+from Entregas import RecientesWidget
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(800, 600)
-        MainWindow.setMinimumSize(QSize(800, 600))
-        MainWindow.setMaximumSize(QSize(800, 600))
-        MainWindow.setStyleSheet(u"background-color: rgb(18, 18, 18);")
+        MainWindow.setMinimumSize(QSize(800, 580))
+        MainWindow.setMaximumSize(QSize(800, 580))
+        MainWindow.setStyleSheet(u"background-color: rgb(43, 45, 48);")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.barraMenu = QWidget(self.centralwidget)
@@ -37,17 +39,24 @@ class Ui_MainWindow(object):
         self.barraMenu.setMinimumSize(QSize(0, 0))
         self.barraMenu.setAutoFillBackground(False)
         self.barraMenu.setStyleSheet(u"QWidget{\n"
-"background-color: rgb(50, 50, 50);\n"
+"background-color: rgb(255,89 ,0 );\n"
 "}\n"
 "QPushButton{\n"
 "color:white; \n"
 "text-align:left;\n"
 "height:45px;\n"
-"\n"
-"}")
+"border-radius: 10px;\n"
+"border-style: outset;\n"
+"border-width: 1px;\n"
+"border-color: white;\n"
+"padding: 5px;\n"
+"}\n"
+"QPushButton:checked{\n"
+"background-color: rgb(255, 255, 255);\n"
+"color: rgb(238, 92, 2);\n}}")
         self.layoutWidget = QWidget(self.barraMenu)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(20, 70, 190, 449))
+        self.layoutWidget.setGeometry(QRect(20, 70, 190, 450))
         self.verticalLayout = QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setSpacing(15)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -133,10 +142,10 @@ class Ui_MainWindow(object):
         self.menuPrincipal = QWidget(self.centralwidget)
         self.menuPrincipal.setObjectName(u"menuPrincipal")
         self.menuPrincipal.setGeometry(QRect(240, 0, 550, 550))
-        self.menuPrincipal.setMinimumSize(QSize(550, 550))
-        self.menuPrincipal.setMaximumSize(QSize(550, 550))
+        self.menuPrincipal.setMinimumSize(QSize(550, 560))
+        self.menuPrincipal.setMaximumSize(QSize(550, 560))
         self.menuPrincipal.setAutoFillBackground(False)
-        self.menuPrincipal.setStyleSheet(u"background-color: rgb(50, 50, 50);")
+        self.menuPrincipal.setStyleSheet(u"background-color:rgb(255, 255, 255);\n")
         self.splitter = QSplitter(self.menuPrincipal)
         self.splitter.setObjectName(u"splitter")
         self.splitter.setGeometry(QRect(0, 0, 551, 560))
@@ -144,6 +153,15 @@ class Ui_MainWindow(object):
         self.stackedWidget = QStackedWidget(self.splitter)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.stackedWidget.setMinimumSize(QSize(550, 550))
+        self.stackedWidget.setStyleSheet(u"QLabel{\n"
+                                         u"color:black;\n}"
+                                         u"QPushButton{\n"
+                                         "background-color: rgb(255,255,255);\n"
+                                        "border-radius: 10px;\n"
+                                        "border-style: outset;\n"
+                                        "border-width: 1px;\n"
+                                        "border-color: rgb(0,0,0);\n"
+                                         "color: black;\n}")
         self.principal = QWidget()
         self.principal.setObjectName(u"principal")
         self.splitter_2 = QSplitter(self.principal)
@@ -234,10 +252,10 @@ class Ui_MainWindow(object):
         self.label.setScaledContents(True)
         self.splitter_2.addWidget(self.label)
         self.stackedWidget.addWidget(self.principal)
-        self.catalog_page = QWidget()
+        self.catalog_page = CatalogoWidget()
         self.catalog_page.setObjectName(u"catalog_page")
         self.stackedWidget.addWidget(self.catalog_page)
-        self.recientes_page = QWidget()
+        self.recientes_page = RecientesWidget()
         self.recientes_page.setObjectName(u"recientes_page")
         self.stackedWidget.addWidget(self.recientes_page)
         self.espera_page = QWidget()
@@ -269,12 +287,12 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.b1Menu.setText(QCoreApplication.translate("MainWindow", u"Menu principal", None))
         self.b2Catalogo.setText(QCoreApplication.translate("MainWindow", u"Cat\u00e1logo de libros", None))
-        self.b3Acciones.setText(QCoreApplication.translate("MainWindow", u"Entregas recientes", None))
+        self.b3Acciones.setText(QCoreApplication.translate("MainWindow", u"Acciones recientes", None))
         self.b4Espera.setText(QCoreApplication.translate("MainWindow", u"Lista de espera", None))
         self.b5Historial.setText(QCoreApplication.translate("MainWindow", u"Historial de pr\u00e9stamos", None))
         self.b6Arboles.setText(QCoreApplication.translate("MainWindow", u"\u00c1rboles", None))
         self.b7Salir.setText(QCoreApplication.translate("MainWindow", u"Salir", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Proyecto final", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Proyecto final\n\nSebatián Velasco Cantu - 00517161", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"Estructuras de datos", None))
         self.label.setText("")
     # retranslateUi

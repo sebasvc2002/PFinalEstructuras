@@ -5,7 +5,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowTitle("Test1")
+        self.setWindowTitle("Proyecto Final")
         self.b1Menu.clicked.connect(self.switch_menu)
         self.b2Catalogo.clicked.connect(self.switch_catalogo)
         self.b3Acciones.clicked.connect(self.switch_Acciones)
