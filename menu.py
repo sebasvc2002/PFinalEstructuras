@@ -145,7 +145,7 @@ class Ui_MainWindow(object):
         self.menuPrincipal.setMinimumSize(QSize(550, 560))
         self.menuPrincipal.setMaximumSize(QSize(550, 560))
         self.menuPrincipal.setAutoFillBackground(False)
-        self.menuPrincipal.setStyleSheet(u"background-color:rgb(255, 255, 255);\n")
+        self.menuPrincipal.setStyleSheet(u"background-color:rgb(32,32,32);\n")
         self.splitter = QSplitter(self.menuPrincipal)
         self.splitter.setObjectName(u"splitter")
         self.splitter.setGeometry(QRect(0, 0, 551, 560))
@@ -153,15 +153,7 @@ class Ui_MainWindow(object):
         self.stackedWidget = QStackedWidget(self.splitter)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.stackedWidget.setMinimumSize(QSize(550, 550))
-        self.stackedWidget.setStyleSheet(u"QLabel{\n"
-                                         u"color:black;\n}"
-                                         u"QPushButton{\n"
-                                         "background-color: rgb(255,255,255);\n"
-                                        "border-radius: 10px;\n"
-                                        "border-style: outset;\n"
-                                        "border-width: 1px;\n"
-                                        "border-color: rgb(0,0,0);\n"
-                                         "color: black;\n}")
+
         self.principal = QWidget()
         self.principal.setObjectName(u"principal")
         self.splitter_2 = QSplitter(self.principal)
