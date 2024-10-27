@@ -1,7 +1,8 @@
+from PySide6.QtGui import QBrush, QPen
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QLineEdit, QGraphicsView, QGraphicsScene, \
     QGraphicsEllipseItem, QMessageBox
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QPainter, QPen
+from PySide6.QtGui import QPainter, QPen, QColor
 
 
 class NodoArbol:
@@ -14,7 +15,7 @@ class NodoArbol:
 class ArbolBinarioWidget(QWidget):
     def __init__(self):
         super().__init__()
-        self.setFixedSize(500, 500)
+        self.setFixedSize(550, 500)
         self.raiz_arbol = None  # Root of the binary tree
 
         # Layouts and Widgets
@@ -27,6 +28,7 @@ class ArbolBinarioWidget(QWidget):
         # Buttons for actions
         self.bAgregar = QPushButton("Añadir nodo")
         self.BEliminar = QPushButton("Borrar nodo")
+        self.BBuscar = QPushButton("Buscar nodo")
         self.BPreorden = QPushButton("Preorden")
         self.BInorden = QPushButton("Inorden")
         self.bPostorden = QPushButton("Postorden")
@@ -36,10 +38,12 @@ class ArbolBinarioWidget(QWidget):
         self.scene = QGraphicsScene()
         self.graphics_view = QGraphicsView(self.scene)
         self.graphics_view.setRenderHint(QPainter.Antialiasing)
+        self.scene.setBackgroundBrush(QBrush(QColor("#8b8b8b")))
 
         # Connect buttons
         self.bAgregar.clicked.connect(self.nuevo_nodo)
         self.BEliminar.clicked.connect(self.borrar_nodo)
+        self.BBuscar.clicked.connect(self.buscar_nodo)
         self.BPreorden.clicked.connect(self.rPreorden)
         self.BInorden.clicked.connect(self.rInorden)
         self.bPostorden.clicked.connect(self.rPostorden)
@@ -48,6 +52,7 @@ class ArbolBinarioWidget(QWidget):
         self.layout.addWidget(self.input_field)
         self.layout.addWidget(self.bAgregar)
         self.layout.addWidget(self.BEliminar)
+        self.layout.addWidget(self.BBuscar)
         self.layout.addWidget(self.BPreorden)
         self.layout.addWidget(self.BInorden)
         self.layout.addWidget(self.bPostorden)
@@ -61,7 +66,7 @@ class ArbolBinarioWidget(QWidget):
         if value:
             try:
             # Insert the node
-                self.raiz_arbol = self._insertar(self.raiz_arbol, float(value))
+                self.raiz_arbol = self._insertar(self.raiz_arbol, int(value))
                 self.input_field.clear()
                 self.refresh_Arbol()
             except ValueError:
@@ -72,10 +77,20 @@ class ArbolBinarioWidget(QWidget):
         value = self.input_field.text().strip()
         if value:
             # Delete the node
-            self.raiz_arbol = self._borrar(self.raiz_arbol, float(value))
+            self.raiz_arbol = self._borrar(self.raiz_arbol, int(value))
             self.input_field.clear()
             self.refresh_Arbol()
-
+    def buscar_nodo(self):
+        value = self.input_field.text().strip()
+        if value:
+            try:
+                value = int(value)
+                if value in self._preorder(self.raiz_arbol):
+                    QMessageBox.information(self, "Resultado", f"Resultado: {value} encontrado")
+                else:
+                    QMessageBox.information(self, "Resultado", f"Resultado: {value} no encontrado")
+            except ValueError:
+                self.show_error()
     def rPreorden(self):
         resultado = self._preorder(self.raiz_arbol)
         self.resultado_label.setText(f"Resultado: {resultado}")
@@ -89,13 +104,7 @@ class ArbolBinarioWidget(QWidget):
         self.resultado_label.setText(f"Resultado:: {resultado}")
     def show_error(self):
         # Crear un mensaje emergente
-        msg = QMessageBox()
-        msg.setWindowTitle("Error")
-        print("Error")
-        msg.setText("Inserta solamente números")
-        msg.setIcon(QMessageBox.Information)
-        msg.setStandardButtons(QMessageBox.Ok)
-        msg.exec_()
+       QMessageBox.warning(self, "Error", "Solamente ingresar números enteros")
 
     # Métodos del árbol binario
     def _insertar(self, node, value):
@@ -153,11 +162,12 @@ class ArbolBinarioWidget(QWidget):
         if node:
             # Draw the node as a circle with a value label
             node_item = QGraphicsEllipseItem(x - 15, y - 15, 30, 30)
-            node_item.setBrush(Qt.green)
+            node_item.setBrush(QBrush(QColor("#fe9560")))
             self.scene.addItem(node_item)
 
             # Add the node's value as text inside the circle
             text_item = self.scene.addText(str(node.value))
+            text_item.setDefaultTextColor(Qt.black)
             text_item.setPos(x - 8, y - 10)
 
             # Create a pen for drawing lines

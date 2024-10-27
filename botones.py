@@ -11,7 +11,8 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.b3Acciones.clicked.connect(self.switch_Acciones)
         self.b4Espera.clicked.connect(self.switch_Espera)
         self.b5Historial.clicked.connect(self.switch_Historial)
-        self.b6Arboles.clicked.connect(self.switch_Arboles)
+        self.b6Grafos.clicked.connect(self.switch_Grafos)
+        self.b7Arboles.clicked.connect(self.switch_Arboles)
 
     def switch_menu(self):
         self.stackedWidget.setCurrentIndex(0)
@@ -28,5 +29,10 @@ class MainWindow(QMainWindow,Ui_MainWindow):
     def switch_Historial(self):
         self.stackedWidget.setCurrentIndex(4)
 
-    def switch_Arboles(self):
+    def switch_Grafos(self):
         self.stackedWidget.setCurrentIndex(5)
+
+    def switch_Arboles(self):
+        self.stackedWidget.setCurrentIndex(6)
+
+
