@@ -69,7 +69,10 @@ class RecientesWidget(QWidget):
 
     def borrar_accion(self):
         """Elimina el libro seleccionado de la lista"""
-        self.acciones.pop()
+        if len(self.acciones)==0:
+            QMessageBox.warning(self, "Error", "No hay acciones para eliminar")
+        else:
+            self.acciones.pop()
         self.actualizar_lista()
 
 
