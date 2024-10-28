@@ -16,22 +16,22 @@ class CatalogoWidget(QWidget):
         # Botones
         self.btn_agregar = QPushButton("Agregar Libro")
         self.btn_agregar.clicked.connect(self.agregar_libro)
-        self.btn_agregar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 30px;")
+        self.btn_agregar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.layout.addWidget(self.btn_agregar)
 
         self.btn_eliminar = QPushButton("Eliminar Libro")
         self.btn_eliminar.clicked.connect(self.eliminar_libro)
-        self.btn_eliminar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 30px;")
+        self.btn_eliminar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.layout.addWidget(self.btn_eliminar)
 
         self.btn_ordenar = QPushButton("Ordenar por ISBN")
         self.btn_ordenar.clicked.connect(self.ordenar_libros)
-        self.btn_ordenar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 30px;")
+        self.btn_ordenar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.layout.addWidget(self.btn_ordenar)
 
         self.btn_buscar = QPushButton("Buscar por ISBN")
         self.btn_buscar.clicked.connect(self.buscar_libro)
-        self.btn_buscar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 30px;")
+        self.btn_buscar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.layout.addWidget(self.btn_buscar)
 
         # Crear lista gráfica

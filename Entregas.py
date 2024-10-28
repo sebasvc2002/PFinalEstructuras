@@ -26,11 +26,11 @@ class RecientesWidget(QWidget):
         self._tipoAccion.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;min-height: 40px;font-size: 15px;")
         self.layout.addWidget(self._tipoAccion)
         self.btn_agregar = QPushButton("Agregar Libro")
-        self.btn_agregar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;")
+        self.btn_agregar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.btn_agregar.clicked.connect(self.agregar_accion)
         self.layout.addWidget(self.btn_agregar)
         self.btn_eliminar = QPushButton("Eliminar acción más reciente")
-        self.btn_eliminar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;")
+        self.btn_eliminar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.btn_eliminar.clicked.connect(self.borrar_accion)
         self.layout.addWidget(self.btn_eliminar)
         # Crear lista gráfica
