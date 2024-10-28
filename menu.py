@@ -22,6 +22,7 @@ import resources_rc
 from arbol import ArbolBinarioWidget
 from catalogo import CatalogoWidget
 from Entregas import RecientesWidget
+from Espera import EsperaWidget
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -261,7 +262,7 @@ class Ui_MainWindow(object):
         self.recientes_page = RecientesWidget()
         self.recientes_page.setObjectName(u"recientes_page")
         self.stackedWidget.addWidget(self.recientes_page)
-        self.espera_page = QWidget()
+        self.espera_page = EsperaWidget()
         self.espera_page.setObjectName(u"espera_page")
         self.stackedWidget.addWidget(self.espera_page)
         self.historial_page = QWidget()

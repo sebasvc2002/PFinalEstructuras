@@ -12,7 +12,7 @@ class RecientesWidget(QWidget):
         # Lista para gestionar los libros como arreglos (listas)
         self.acciones = []
 
-        # Configuración de layout
+        # Configuración de Vlayout
         self.layout = QVBoxLayout()
 
 
@@ -40,7 +40,7 @@ class RecientesWidget(QWidget):
         self.layout.addWidget(self.Pila_Libros)
 
 
-        # Configuración de layout
+        # Configuración de Vlayout
         self.setLayout(self.layout)
 
     def actualizar_lista(self):

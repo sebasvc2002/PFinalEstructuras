@@ -48,7 +48,7 @@ class ArbolBinarioWidget(QWidget):
         self.BInorden.clicked.connect(self.rInorden)
         self.bPostorden.clicked.connect(self.rPostorden)
 
-        # Assemble layout
+        # Assemble Vlayout
         self.layout.addWidget(self.input_field)
         self.layout.addWidget(self.bAgregar)
         self.layout.addWidget(self.BEliminar)
@@ -86,22 +86,22 @@ class ArbolBinarioWidget(QWidget):
             try:
                 value = int(value)
                 if value in self._preorder(self.raiz_arbol):
-                    QMessageBox.information(self, "Resultado", f"Resultado: {value} encontrado")
+                    QMessageBox.information(self, "Resultado", f"Valor: {value} encontrado")
                 else:
                     QMessageBox.information(self, "Resultado", f"Resultado: {value} no encontrado")
             except ValueError:
                 self.show_error()
     def rPreorden(self):
         resultado = self._preorder(self.raiz_arbol)
-        self.resultado_label.setText(f"Resultado: {resultado}")
+        QMessageBox.information(self, "Preorden", f"Resultado:\n {resultado}")
 
     def rInorden(self):
         resultado = self._inorden(self.raiz_arbol)
-        self.resultado_label.setText(f"Resultado:: {resultado}")
+        QMessageBox.information(self, "Inorden", f"Resultado:\n {resultado}")
 
     def rPostorden(self):
         resultado = self._postorden(self.raiz_arbol)
-        self.resultado_label.setText(f"Resultado:: {resultado}")
+        QMessageBox.information(self, "Postorden", f"Resultado:\n {resultado}")
     def show_error(self):
         # Crear un mensaje emergente
        QMessageBox.warning(self, "Error", "Solamente ingresar números enteros")
