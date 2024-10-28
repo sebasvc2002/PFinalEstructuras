@@ -1,11 +1,13 @@
 Using PySide6
 
-Catálogo - Arreglos, ordenamiento (terminado)
+Catálogo - Arreglos, ordenamiento, búsqueda binaria (terminado)
 
-Entregas recientes - pilas
+Entregas recientes - pilas (terminado)
 
-Lista de espera - Colas
+Lista de espera - Colas (terminado)
 
 Historial de préstamos - lista doblemente ligada
 
-Arboles - missing search nodes
+Grafos - (pendiente)
+
+Arboles - (terminado)
