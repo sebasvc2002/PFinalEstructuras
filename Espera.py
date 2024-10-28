@@ -26,7 +26,7 @@ class EsperaWidget(QWidget):
         self.HLayout.addWidget(self.BGo)
         self.Vlayout.addLayout(self.HLayout)
 
-        self.BAgregar = QPushButton("Agregar persona a la lista")
+        self.BAgregar = QPushButton("Agregar persona a la cola")
         self.BAgregar.clicked.connect(self.agregar_persona)
         self.BAgregar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 30px;")
         self.Vlayout.addWidget(self.BAgregar)
@@ -37,8 +37,6 @@ class EsperaWidget(QWidget):
 
 
 
-        self.Title_label = QLabel("Libro: ")
-        self.Vlayout.addWidget(self.Title_label)
         self.ColaLibros = QListWidget()
         self.ColaLibros.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;max-height: 350px;font-size: 15px;")
         self.Vlayout.addWidget(self.ColaLibros)
@@ -79,13 +77,22 @@ class EsperaWidget(QWidget):
     def atender_persona(self):
         dq=self.TLibro.currentText()
         if dq == "Harry Potter - J.K. Rowling":
-            self.espera1.popleft()
+            if len(self.espera1)==0:
+                QMessageBox.critical(self, "Error", "No hay personas en la lista")
+            else:
+                self.espera1.popleft()
             self.actualizar_lista()
         elif dq == "El Señor de los Anillos - J.R.R. Tolkien":
-            self.espera2.popleft()
+            if len(self.espera2)==0:
+                QMessageBox.critical(self, "Error", "No hay personas en la lista")
+            else:
+                self.espera2.popleft()
             self.actualizar_lista()
         elif dq == "Cien años de soledad - Gabriel García Márquez":
-            self.espera3.popleft()
+            if len(self.espera3)==0:
+                QMessageBox.critical(self, "Error", "No hay personas en la lista")
+            else:
+                self.espera3.popleft()
             self.actualizar_lista()
         else:
             pass
