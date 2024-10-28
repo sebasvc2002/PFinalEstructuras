@@ -14,7 +14,7 @@ class RecientesWidget(QWidget):
 
         # Configuración de Vlayout
         self.layout = QVBoxLayout()
-
+        self.layout.addSpacing(15)
 
 
         # Botones

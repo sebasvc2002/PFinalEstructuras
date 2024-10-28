@@ -1,6 +1,6 @@
 from PySide6.QtGui import QBrush, QPen
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QLineEdit, QGraphicsView, QGraphicsScene, \
-    QGraphicsEllipseItem, QMessageBox
+    QGraphicsEllipseItem, QMessageBox,QHBoxLayout
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPainter, QPen, QColor
 
@@ -20,6 +20,8 @@ class ArbolBinarioWidget(QWidget):
 
         # Layouts and Widgets
         self.layout = QVBoxLayout()
+        self.layouth=QHBoxLayout()
+        self.layouth1=QHBoxLayout()
 
         # Input for adding nodes
         self.input_field = QLineEdit()
@@ -27,18 +29,24 @@ class ArbolBinarioWidget(QWidget):
 
         # Buttons for actions
         self.bAgregar = QPushButton("Añadir nodo")
+        self.bAgregar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 35px;")
         self.BEliminar = QPushButton("Borrar nodo")
+        self.BEliminar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 35px;")
         self.BBuscar = QPushButton("Buscar nodo")
+        self.BBuscar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 35px;")
         self.BPreorden = QPushButton("Preorden")
+        self.BPreorden.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 35px;")
         self.BInorden = QPushButton("Inorden")
+        self.BInorden.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 35px;")
         self.bPostorden = QPushButton("Postorden")
-        self.resultado_label = QLabel("Resultado: ")
+        self.bPostorden.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 35px;")
 
         # Tree visualization
         self.scene = QGraphicsScene()
         self.graphics_view = QGraphicsView(self.scene)
         self.graphics_view.setRenderHint(QPainter.Antialiasing)
         self.scene.setBackgroundBrush(QBrush(QColor("#8b8b8b")))
+        self.graphics_view.setFixedSize(535, 450)
 
         # Connect buttons
         self.bAgregar.clicked.connect(self.nuevo_nodo)
@@ -49,17 +57,22 @@ class ArbolBinarioWidget(QWidget):
         self.bPostorden.clicked.connect(self.rPostorden)
 
         # Assemble Vlayout
+        self.layout.addSpacing(25)
         self.layout.addWidget(self.input_field)
-        self.layout.addWidget(self.bAgregar)
-        self.layout.addWidget(self.BEliminar)
-        self.layout.addWidget(self.BBuscar)
-        self.layout.addWidget(self.BPreorden)
-        self.layout.addWidget(self.BInorden)
-        self.layout.addWidget(self.bPostorden)
-        self.layout.addWidget(self.resultado_label)
+        self.layouth.addWidget(self.bAgregar)
+        self.layouth.addWidget(self.BEliminar)
+        self.layouth.addWidget(self.BBuscar)
+        self.layout.addLayout(self.layouth)
+        self.layouth1.addWidget(self.BPreorden)
+        self.layouth1.addWidget(self.BInorden)
+        self.layouth1.addWidget(self.bPostorden)
+
+        self.layout.addLayout(self.layouth1)
+        self.layout.addSpacing(15)
         self.layout.addWidget(self.graphics_view)
 
         self.setLayout(self.layout)
+
 
     def nuevo_nodo(self):
         value = self.input_field.text().strip()

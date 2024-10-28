@@ -19,12 +19,14 @@ class EsperaWidget(QWidget):
         self.TLibro.addItem("Harry Potter - J.K. Rowling")
         self.TLibro.addItem("El Señor de los Anillos - J.R.R. Tolkien")
         self.TLibro.addItem("Cien años de soledad - Gabriel García Márquez")
+        self.Vlayout.addSpacing(20)
         self.HLayout.addWidget(self.TLibro)
         self.BGo = QPushButton("Go")
         self.BGo.clicked.connect(self.go)
         self.BGo.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 30px;")
         self.HLayout.addWidget(self.BGo)
         self.Vlayout.addLayout(self.HLayout)
+
 
         self.BAgregar = QPushButton("Agregar persona a la lista")
         self.BAgregar.clicked.connect(self.agregar_persona)
@@ -34,13 +36,12 @@ class EsperaWidget(QWidget):
         self.BAtender.clicked.connect(self.atender_persona)
         self.BAtender.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 30px;")
         self.Vlayout.addWidget(self.BAtender)
+        self.Vlayout.addSpacing(10)
 
 
 
-        self.Title_label = QLabel("Libro: ")
-        self.Vlayout.addWidget(self.Title_label)
         self.ColaLibros = QListWidget()
-        self.ColaLibros.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;max-height: 350px;font-size: 15px;")
+        self.ColaLibros.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;max-height: 400px;font-size: 15px;")
         self.Vlayout.addWidget(self.ColaLibros)
 
         self.setLayout(self.Vlayout)
