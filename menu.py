@@ -23,6 +23,7 @@ from arbol import ArbolBinarioWidget
 from catalogo import CatalogoWidget
 from Entregas import RecientesWidget
 from Espera import EsperaWidget
+from lista import ListaWidget
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -107,16 +108,16 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.b4Espera)
 
-        self.b5Historial = QPushButton(self.layoutWidget)
-        self.b5Historial.setObjectName(u"b5Historial")
+        self.b5Reproduccion = QPushButton(self.layoutWidget)
+        self.b5Reproduccion.setObjectName(u"b5Reproduccion")
         icon4 = QIcon()
-        icon4.addFile(u":/Fotos/resources png/demography.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.b5Historial.setIcon(icon4)
-        self.b5Historial.setIconSize(QSize(25, 25))
-        self.b5Historial.setCheckable(True)
-        self.b5Historial.setAutoExclusive(True)
+        icon4.addFile(u":/Fotos/resources png/play_pause.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.b5Reproduccion.setIcon(icon4)
+        self.b5Reproduccion.setIconSize(QSize(25, 25))
+        self.b5Reproduccion.setCheckable(True)
+        self.b5Reproduccion.setAutoExclusive(True)
 
-        self.verticalLayout.addWidget(self.b5Historial)
+        self.verticalLayout.addWidget(self.b5Reproduccion)
 
         self.b6Grafos = QPushButton(self.layoutWidget)
         self.b6Grafos.setObjectName(u"b6Grafos")
@@ -265,9 +266,9 @@ class Ui_MainWindow(object):
         self.espera_page = EsperaWidget()
         self.espera_page.setObjectName(u"espera_page")
         self.stackedWidget.addWidget(self.espera_page)
-        self.historial_page = QWidget()
-        self.historial_page.setObjectName(u"historial_page")
-        self.stackedWidget.addWidget(self.historial_page)
+        self.reproduccion_page = ListaWidget()
+        self.reproduccion_page.setObjectName(u"reproduccion_page")
+        self.stackedWidget.addWidget(self.reproduccion_page)
         self.arboles_page = ArbolBinarioWidget()
         self.grafos_page = QWidget()
         self.grafos_page.setObjectName(u"grafos_page")
@@ -297,7 +298,7 @@ class Ui_MainWindow(object):
         self.b3Acciones.setText(QCoreApplication.translate("MainWindow", u"Acciones recientes", None))
         self.b4Espera.setText(QCoreApplication.translate("MainWindow", u"Lista de espera", None))
         self.b6Grafos.setText(QCoreApplication.translate("MainWindow", u"Grafos", None))
-        self.b5Historial.setText(QCoreApplication.translate("MainWindow", u"Historial de pr\u00e9stamos", None))
+        self.b5Reproduccion.setText(QCoreApplication.translate("MainWindow", u"Lista de reproducción", None))
         self.b7Arboles.setText(QCoreApplication.translate("MainWindow", u"\u00c1rboles", None))
         self.b8Salir.setText(QCoreApplication.translate("MainWindow", u"Salir", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Proyecto final\n\nSebatián Velasco Cantu - 00517161", None))

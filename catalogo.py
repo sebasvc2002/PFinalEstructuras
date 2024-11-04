@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox, QLabel
 from PySide6.QtCore import Qt
 
 class CatalogoWidget(QWidget):
@@ -14,6 +14,7 @@ class CatalogoWidget(QWidget):
         self.layout = QVBoxLayout()
 
         # Botones
+
         self.btn_agregar = QPushButton("Agregar Libro")
         self.btn_agregar.clicked.connect(self.agregar_libro)
         self.btn_agregar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")

@@ -99,14 +99,14 @@ class ArbolBinarioWidget(QWidget):
         if value:
             try:
                 value = int(value)
-                if value in self._preorder(self.raiz_arbol):
+                if value in self._preorden(self.raiz_arbol):
                     QMessageBox.information(self, "Resultado", f"Valor: {value} encontrado")
                 else:
                     QMessageBox.information(self, "Resultado", f"Resultado: {value} no encontrado")
             except ValueError:
                 self.show_error()
     def rPreorden(self):
-        resultado = self._preorder(self.raiz_arbol)
+        resultado = self._preorden(self.raiz_arbol)
         QMessageBox.information(self, "Preorden", f"Resultado:\n {resultado}")
 
     def rInorden(self):
@@ -153,9 +153,9 @@ class ArbolBinarioWidget(QWidget):
             actual = actual.left
         return actual
 
-    def _preorder(self, node):
+    def _preorden(self, node):
         if node:
-            return [node.value] + self._preorder(node.left) + self._preorder(node.right)
+            return [node.value] + self._preorden(node.left) + self._preorden(node.right)
         return []
 
     def _inorden(self, node):
