@@ -14,6 +14,7 @@ class EsperaWidget(QWidget):
         # Configuración de Vlayout
         self.Vlayout = QVBoxLayout()
         self.HLayout=QHBoxLayout()
+        self.Vlayout.addSpacing(25)
         # Botones
         self.TLibro = QComboBox()
         self.TLibro.addItem("Harry Potter - J.K. Rowling")
@@ -22,17 +23,17 @@ class EsperaWidget(QWidget):
         self.HLayout.addWidget(self.TLibro)
         self.BGo = QPushButton("Go")
         self.BGo.clicked.connect(self.go)
-        self.BGo.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 30px;")
+        self.BGo.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.HLayout.addWidget(self.BGo)
         self.Vlayout.addLayout(self.HLayout)
 
         self.BAgregar = QPushButton("Agregar persona a la cola")
         self.BAgregar.clicked.connect(self.agregar_persona)
-        self.BAgregar.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 30px;")
+        self.BAgregar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.Vlayout.addWidget(self.BAgregar)
         self.BAtender = QPushButton("Atender persona")
         self.BAtender.clicked.connect(self.atender_persona)
-        self.BAtender.setStyleSheet("background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 30px;")
+        self.BAtender.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.Vlayout.addWidget(self.BAtender)
 
 
