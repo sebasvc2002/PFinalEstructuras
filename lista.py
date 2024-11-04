@@ -227,31 +227,38 @@ class ListaWidget(QWidget):
         else:
             QMessageBox.warning(self, "Error", "Debe seleccionar una canción")
     def siguiente_cancion(self):
+        nodo=None
         try:
             self.index=(self.index+1)%self.lista.size
-        except ZeroDivisionError:
-            nodo=self.lista.get(self.index)
-        try:
-            self.CActual.setText(f"{nodo.valor['cancion']} - {nodo.valor['autor']}")
-        except AttributeError:
-            self.CActual.setText("Ninguna")
-    def cancion_anterior(self):
-        try:
-            self.index = (self.index - 1) % self.lista.size
+            nodo = self.lista.get(self.index)
         except ZeroDivisionError:
             pass
-        nodo = self.lista.get(self.index)
-        try:
+        if nodo is not None:
             self.CActual.setText(f"{nodo.valor['cancion']} - {nodo.valor['autor']}")
-        except AttributeError:
+        else:
+            self.CActual.setText("Ninguna")
+    def cancion_anterior(self):
+        nodo=None
+        try:
+            self.index = (self.index - 1) % self.lista.size
+            nodo = self.lista.get(self.index)
+        except ZeroDivisionError:
+            pass
+
+        if nodo is not None:
+            self.CActual.setText(f"{nodo.valor['cancion']} - {nodo.valor['autor']}")
+        else:
             self.CActual.setText("Ninguna")
     def actualizar_lista(self):
         self.lista_rep.clear()
         for i in range(self.lista.size):
             nodo=self.lista.get(i)
             self.lista_rep.addItem(f"{nodo.valor['cancion']} - {nodo.valor['autor']}")
-        nodo=self.lista.get(self.index)
-        self.CActual.setText(f"{nodo.valor['cancion']} - {nodo.valor['autor']}")
+        if self.lista.size>0:
+            nodo=self.lista.get(self.index)
+            self.CActual.setText(f"{nodo.valor['cancion']} - {nodo.valor['autor']}")
+        else:
+            self.CActual.setText("Ninguna")
 
 
 if __name__ == "__main__":
