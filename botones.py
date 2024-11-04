@@ -10,7 +10,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.b2Catalogo.clicked.connect(self.switch_catalogo)
         self.b3Acciones.clicked.connect(self.switch_Acciones)
         self.b4Espera.clicked.connect(self.switch_Espera)
-        self.b5Historial.clicked.connect(self.switch_Historial)
+        self.b5Reproduccion.clicked.connect(self.switch_Historial)
         self.b6Grafos.clicked.connect(self.switch_Grafos)
         self.b7Arboles.clicked.connect(self.switch_Arboles)
 

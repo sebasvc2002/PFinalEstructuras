@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="Fotos">
+    <file>resources png/graph.png</file>
+    <file>resources png/play_pause.png</file>
     <file>resources png/Anahuac Mayab Logo 2.png</file>
     <file>resources png/catalog.png</file>
     <file>resources png/close.png</file>
@@ -9,5 +11,6 @@
     <file>resources png/home.png</file>
     <file>resources png/tree.png</file>
     <file>resources png/wait.png</file>
+    <file>resources png/Music.png</file>
   </qresource>
 </RCC>

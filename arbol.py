@@ -1,6 +1,6 @@
 from PySide6.QtGui import QBrush, QPen
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QLineEdit, QGraphicsView, QGraphicsScene, \
-    QGraphicsEllipseItem, QMessageBox
+    QGraphicsEllipseItem, QMessageBox,QHBoxLayout
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPainter, QPen, QColor
 
@@ -20,25 +20,34 @@ class ArbolBinarioWidget(QWidget):
 
         # Layouts and Widgets
         self.layout = QVBoxLayout()
+        self.layouth=QHBoxLayout()
+        self.layouth1=QHBoxLayout()
 
         # Input for adding nodes
         self.input_field = QLineEdit()
         self.input_field.setPlaceholderText("Introduce valor")
+        self.input_field.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;min-height: 40px;font-size: 15px;")
 
         # Buttons for actions
         self.bAgregar = QPushButton("Añadir nodo")
+        self.bAgregar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.BEliminar = QPushButton("Borrar nodo")
+        self.BEliminar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.BBuscar = QPushButton("Buscar nodo")
+        self.BBuscar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.BPreorden = QPushButton("Preorden")
+        self.BPreorden.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.BInorden = QPushButton("Inorden")
+        self.BInorden.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.bPostorden = QPushButton("Postorden")
-        self.resultado_label = QLabel("Resultado: ")
+        self.bPostorden.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
 
         # Tree visualization
         self.scene = QGraphicsScene()
         self.graphics_view = QGraphicsView(self.scene)
         self.graphics_view.setRenderHint(QPainter.Antialiasing)
         self.scene.setBackgroundBrush(QBrush(QColor("#8b8b8b")))
+        self.graphics_view.setFixedSize(535, 450)
 
         # Connect buttons
         self.bAgregar.clicked.connect(self.nuevo_nodo)
@@ -48,18 +57,23 @@ class ArbolBinarioWidget(QWidget):
         self.BInorden.clicked.connect(self.rInorden)
         self.bPostorden.clicked.connect(self.rPostorden)
 
-        # Assemble layout
+        # Assemble Vlayout
+        self.layout.addSpacing(25)
         self.layout.addWidget(self.input_field)
-        self.layout.addWidget(self.bAgregar)
-        self.layout.addWidget(self.BEliminar)
-        self.layout.addWidget(self.BBuscar)
-        self.layout.addWidget(self.BPreorden)
-        self.layout.addWidget(self.BInorden)
-        self.layout.addWidget(self.bPostorden)
-        self.layout.addWidget(self.resultado_label)
+        self.layouth.addWidget(self.bAgregar)
+        self.layouth.addWidget(self.BEliminar)
+        self.layouth.addWidget(self.BBuscar)
+        self.layout.addLayout(self.layouth)
+        self.layouth1.addWidget(self.BPreorden)
+        self.layouth1.addWidget(self.BInorden)
+        self.layouth1.addWidget(self.bPostorden)
+
+        self.layout.addLayout(self.layouth1)
+        self.layout.addSpacing(15)
         self.layout.addWidget(self.graphics_view)
 
         self.setLayout(self.layout)
+
 
     def nuevo_nodo(self):
         value = self.input_field.text().strip()
@@ -85,23 +99,23 @@ class ArbolBinarioWidget(QWidget):
         if value:
             try:
                 value = int(value)
-                if value in self._preorder(self.raiz_arbol):
-                    QMessageBox.information(self, "Resultado", f"Resultado: {value} encontrado")
+                if value in self._preorden(self.raiz_arbol):
+                    QMessageBox.information(self, "Resultado", f"Valor: {value} encontrado")
                 else:
                     QMessageBox.information(self, "Resultado", f"Resultado: {value} no encontrado")
             except ValueError:
                 self.show_error()
     def rPreorden(self):
-        resultado = self._preorder(self.raiz_arbol)
-        self.resultado_label.setText(f"Resultado: {resultado}")
+        resultado = self._preorden(self.raiz_arbol)
+        QMessageBox.information(self, "Preorden", f"Resultado:\n {resultado}")
 
     def rInorden(self):
         resultado = self._inorden(self.raiz_arbol)
-        self.resultado_label.setText(f"Resultado:: {resultado}")
+        QMessageBox.information(self, "Inorden", f"Resultado:\n {resultado}")
 
     def rPostorden(self):
         resultado = self._postorden(self.raiz_arbol)
-        self.resultado_label.setText(f"Resultado:: {resultado}")
+        QMessageBox.information(self, "Postorden", f"Resultado:\n {resultado}")
     def show_error(self):
         # Crear un mensaje emergente
        QMessageBox.warning(self, "Error", "Solamente ingresar números enteros")
@@ -139,9 +153,9 @@ class ArbolBinarioWidget(QWidget):
             actual = actual.left
         return actual
 
-    def _preorder(self, node):
+    def _preorden(self, node):
         if node:
-            return [node.value] + self._preorder(node.left) + self._preorder(node.right)
+            return [node.value] + self._preorden(node.left) + self._preorden(node.right)
         return []
 
     def _inorden(self, node):
