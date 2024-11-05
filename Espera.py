@@ -116,7 +116,7 @@ class EsperaWidget(QWidget):
         """Actualiza la lista gráfica de personas en la interfaz"""
         self.ColaLibros.clear()
         for persona in self.CurrentEspera:
-            self.ColaLibros.addItem(f"{persona}")
+            self.ColaLibros.addItem(f"{self.CurrentEspera.index(persona)+1}. {persona}")
 if __name__ == "__main__":
     app = QApplication([])
     ventana = EsperaWidget()

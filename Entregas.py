@@ -47,7 +47,7 @@ class RecientesWidget(QWidget):
         """Actualiza la lista gráfica de libros en la interfaz"""
         self.Pila_Libros.clear()
         for libro in self.acciones:
-            self.Pila_Libros.addItem(f"{libro['titulo']} - ISBN: {libro['isbn']} - {libro['accion']}")
+            self.Pila_Libros.addItem(f"{self.acciones.index(libro)+1}. {libro['titulo']} - ISBN: {libro['isbn']} - {libro['accion']}")
 
     def agregar_accion(self):
         """Agrega un libro a la lista"""

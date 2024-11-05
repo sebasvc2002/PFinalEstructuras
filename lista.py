@@ -253,7 +253,7 @@ class ListaWidget(QWidget):
         self.lista_rep.clear()
         for i in range(self.lista.size):
             nodo=self.lista.get(i)
-            self.lista_rep.addItem(f"{nodo.valor['cancion']} - {nodo.valor['autor']}")
+            self.lista_rep.addItem(f"{i+1}. {nodo.valor['cancion']} - {nodo.valor['autor']}")
         if self.lista.size>0:
             nodo=self.lista.get(self.index)
             self.CActual.setText(f"{nodo.valor['cancion']} - {nodo.valor['autor']}")

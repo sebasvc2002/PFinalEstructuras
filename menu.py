@@ -301,7 +301,7 @@ class Ui_MainWindow(object):
         self.b5Reproduccion.setText(QCoreApplication.translate("MainWindow", u"Lista de reproducción", None))
         self.b7Arboles.setText(QCoreApplication.translate("MainWindow", u"\u00c1rboles", None))
         self.b8Salir.setText(QCoreApplication.translate("MainWindow", u"Salir", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Proyecto final\n\nSebatián Velasco Cantu - 00517161", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Administración de biblioteca\n\nSebatián Velasco Cantu - 00517161", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"Estructuras de datos", None))
         self.label.setText("")
     # retranslateUi
