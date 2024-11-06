@@ -8,7 +8,6 @@ class RecientesWidget(QWidget):
         super().__init__()
         self.setWindowTitle("Catálogo de Libros")
         self.setGeometry(100, 100, 500, 500)
-
         # Lista para gestionar los libros como arreglos (listas)
         self.acciones = []
 
