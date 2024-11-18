@@ -6,21 +6,26 @@ class EsperaWidget(QWidget):
         super().__init__()
         self.setWindowTitle("Lista de Espera")
         self.setGeometry(100, 100, 550, 500)
+
         #Creación de la lista
         self.espera1 = deque()
         self.espera2 = deque()
         self.espera3 = deque()
         self.CurrentEspera=deque()
-        # Configuración de Vlayout
+
+        # Layouts
         self.Vlayout = QVBoxLayout()
         self.HLayout=QHBoxLayout()
         self.Vlayout.addSpacing(25)
-        # Botones
+
+        #Selección de libro
         self.TLibro = QComboBox()
         self.TLibro.addItem("Harry Potter - J.K. Rowling")
         self.TLibro.addItem("El Señor de los Anillos - J.R.R. Tolkien")
         self.TLibro.addItem("Cien años de soledad - Gabriel García Márquez")
         self.HLayout.addWidget(self.TLibro)
+
+        #Botones
         self.BGo = QPushButton("Go")
         self.BGo.clicked.connect(self.go)
         self.BGo.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
@@ -36,8 +41,7 @@ class EsperaWidget(QWidget):
         self.BAtender.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.Vlayout.addWidget(self.BAtender)
 
-
-
+        # Mostrar la lista de manera gráfica
         self.ColaLibros = QListWidget()
         self.ColaLibros.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;max-height: 350px;font-size: 15px;")
         self.Vlayout.addWidget(self.ColaLibros)
@@ -47,6 +51,7 @@ class EsperaWidget(QWidget):
         self.TLibro.currentIndexChanged.connect(self.go)
         print(self.espera1)
 
+    #Funciones de la cola
     def agregar_persona(self):
         """Agrega una persona a la lista"""
         dq=self.TLibro.currentText()

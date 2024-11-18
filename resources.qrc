@@ -12,5 +12,7 @@
     <file>resources png/tree.png</file>
     <file>resources png/wait.png</file>
     <file>resources png/Music.png</file>
+    <file>resources png/bungalow.png</file>
+    <file>resources png/house.png</file>
   </qresource>
 </RCC>

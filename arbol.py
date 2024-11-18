@@ -18,17 +18,17 @@ class ArbolBinarioWidget(QWidget):
         self.setFixedSize(550, 500)
         self.raiz_arbol = None  # Root of the binary tree
 
-        # Layouts and Widgets
+        # Layouts
         self.layout = QVBoxLayout()
         self.layouth=QHBoxLayout()
         self.layouth1=QHBoxLayout()
 
-        # Input for adding nodes
+        # Añadir nodos
         self.input_field = QLineEdit()
         self.input_field.setPlaceholderText("Introduce valor")
         self.input_field.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;min-height: 40px;font-size: 15px;")
 
-        # Buttons for actions
+        # Botones
         self.bAgregar = QPushButton("Añadir nodo")
         self.bAgregar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.BEliminar = QPushButton("Borrar nodo")
@@ -42,14 +42,14 @@ class ArbolBinarioWidget(QWidget):
         self.bPostorden = QPushButton("Postorden")
         self.bPostorden.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
 
-        # Tree visualization
+        # Tree Visualización del árbol binario
         self.scene = QGraphicsScene()
         self.graphics_view = QGraphicsView(self.scene)
         self.graphics_view.setRenderHint(QPainter.Antialiasing)
         self.scene.setBackgroundBrush(QBrush(QColor("#8b8b8b")))
         self.graphics_view.setFixedSize(535, 450)
 
-        # Connect buttons
+        # Conectar botones
         self.bAgregar.clicked.connect(self.nuevo_nodo)
         self.BEliminar.clicked.connect(self.borrar_nodo)
         self.BBuscar.clicked.connect(self.buscar_nodo)
@@ -57,7 +57,7 @@ class ArbolBinarioWidget(QWidget):
         self.BInorden.clicked.connect(self.rInorden)
         self.bPostorden.clicked.connect(self.rPostorden)
 
-        # Assemble Vlayout
+        # Organización del layout
         self.layout.addSpacing(25)
         self.layout.addWidget(self.input_field)
         self.layouth.addWidget(self.bAgregar)
@@ -74,7 +74,7 @@ class ArbolBinarioWidget(QWidget):
 
         self.setLayout(self.layout)
 
-
+    #Funciones de los botones
     def nuevo_nodo(self):
         value = self.input_field.text().strip()
         if value:

@@ -24,7 +24,7 @@ from catalogo import CatalogoWidget
 from Entregas import RecientesWidget
 from Espera import EsperaWidget
 from lista import ListaWidget
-
+from Grafos import GrafosWidget
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -270,7 +270,7 @@ class Ui_MainWindow(object):
         self.reproduccion_page.setObjectName(u"reproduccion_page")
         self.stackedWidget.addWidget(self.reproduccion_page)
         self.arboles_page = ArbolBinarioWidget()
-        self.grafos_page = QWidget()
+        self.grafos_page = GrafosWidget()
         self.grafos_page.setObjectName(u"grafos_page")
         self.stackedWidget.addWidget(self.grafos_page)
         self.arboles_page.setObjectName(u"arboles_page")
@@ -293,7 +293,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.b1Menu.setText(QCoreApplication.translate("MainWindow", u"Menu principal", None))
+        self.b1Menu.setText(QCoreApplication.translate("MainWindow", u"Página principal", None))
         self.b2Catalogo.setText(QCoreApplication.translate("MainWindow", u"Cat\u00e1logo de libros", None))
         self.b3Acciones.setText(QCoreApplication.translate("MainWindow", u"Acciones recientes", None))
         self.b4Espera.setText(QCoreApplication.translate("MainWindow", u"Lista de espera", None))
