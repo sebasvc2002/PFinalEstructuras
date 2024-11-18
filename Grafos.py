@@ -99,10 +99,10 @@ class GrafosWidget(QWidget):
 
     def agregar_arista(self):
         try:
-            u, ok_u = QInputDialog.getInt(self, "Agregar Arista", "Nodo u (0-6):", 0, 0, 6)
+            u, ok_u = QInputDialog.getInt(self, "Agregar Origen", "Número de casa (0-6):", 0, 0, 6)
             if not ok_u:
                 return
-            v, ok_v = QInputDialog.getInt(self, "Agregar Arista", "Nodo v (0-6):", 0, 0, 6)
+            v, ok_v = QInputDialog.getInt(self, "Agregar Destino", "Número de casa (0-6):", 0, 0, 6)
             if not ok_v:
                 return
             w, ok_w = QInputDialog.getInt(self, "Agregar Arista", "Peso:", 0, 0)
