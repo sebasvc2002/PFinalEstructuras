@@ -9,10 +9,10 @@ import math
 class Grafos:
     def __init__(self, vertices):
         self.V = vertices
-        self.graph = []
+        self.grafo = []
 
     def addEdge(self, u, v, w):
-        self.graph.append([u, v, w])
+        self.grafo.append([u, v, w])
 
     def find(self, parent, i):
         if parent[i] != i:
@@ -28,17 +28,17 @@ class Grafos:
             parent[y] = x
             rank[x] += 1
 
-    def KruskalMST(self):
+    def Kruskal(self):
         result = []
         i = 0
         e = 0
-        self.graph = sorted(self.graph, key=lambda item: item[2])
+        self.grafo = sorted(self.grafo, key=lambda item: item[2])
 
         parent = list(range(self.V))
         rank = [0] * self.V
 
-        while e < self.V - 1 and i < len(self.graph):
-            u, v, w = self.graph[i]
+        while e < self.V - 1 and i < len(self.grafo):
+            u, v, w = self.grafo[i]
             i += 1
             x = self.find(parent, u)
             y = self.find(parent, v)
@@ -48,8 +48,8 @@ class Grafos:
                 result.append([u, v, w])
                 self.union(parent, rank, x, y)
 
-        minimumCost = sum([weight for u, v, weight in result])
-        return result, minimumCost
+        costoMinimo = sum([weight for u, v, weight in result])
+        return result, costoMinimo
 
 
 class GrafosWidget(QWidget):
@@ -64,25 +64,29 @@ class GrafosWidget(QWidget):
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
 
+        # Layouts
         self.lista = QListWidget()
         self.layout.addWidget(self.lista)
 
-        self.btn_agregar = QPushButton("Agregar Arista")
+        # Botones
+        self.btn_agregar = QPushButton("Agregar destino")
         self.btn_agregar.clicked.connect(self.agregar_arista)
         self.layout.addWidget(self.btn_agregar)
 
-        self.btn_calcular = QPushButton("Calcular MST")
-        self.btn_calcular.clicked.connect(self.calcular_mst)
+        self.btn_calcular = QPushButton("Calcular costo mínimo")
+        self.btn_calcular.clicked.connect(self.calcularKruskal)
         self.layout.addWidget(self.btn_calcular)
 
         self.btn_visualizar = QPushButton("Visualizar Grafo")
         self.btn_visualizar.clicked.connect(self.visualizar_grafo)
         self.layout.addWidget(self.btn_visualizar)
 
+        # Grafo
         self.grafo = Grafos(7)
-        self.node_positions = self.calculate_node_positions()
+        self.node_positions = self.calcular_posiciones_nodos()
 
-    def calculate_node_positions(self):
+    #Funciones del grafo
+    def calcular_posiciones_nodos(self):
         positions = []
         radius = 200
         center_x, center_y = 400, 300
@@ -115,17 +119,19 @@ class GrafosWidget(QWidget):
         except ValueError:
             QMessageBox.critical(self, "Error", "Entrada inválida.")
 
-    def calcular_mst(self):
+    def calcularKruskal(self):
         self.lista.clear()
-        result, cost = self.grafo.KruskalMST()
+        result, cost = self.grafo.Kruskal()
         self.lista.addItem(f"Costo total del MST: {cost}")
         for u, v, w in result:
             self.lista.addItem(f"Arista {u} -- {v} con peso {w}")
         self.mst_edges = result
 
     def visualizar_grafo(self):
-        dialog = GraphDialog(self.node_positions, self.grafo.graph, getattr(self, 'mst_edges', []))
+        dialog = GraphDialog(self.node_positions, self.grafo.grafo, getattr(self, 'mst_edges', []))
         dialog.exec()
+
+#Visualizar grafo
 class GraphDialog(QDialog):
     def __init__(self, node_positions, edges, mst_edges):
         super().__init__()
@@ -145,9 +151,9 @@ class GraphDialog(QDialog):
         self.edges = edges
         self.mst_edges = mst_edges
 
-        self.draw_graph()
+        self.dibujar_Grafo()
 
-    def draw_graph(self):
+    def dibujar_Grafo(self):
         for i, (x, y) in enumerate(self.node_positions):
             node = QGraphicsEllipseItem(x - 10, y - 10, 20, 20)
             node.setBrush(Qt.white)
@@ -168,9 +174,11 @@ class GraphDialog(QDialog):
             line = QGraphicsLineItem(x1, y1, x2, y2)
             line.setPen(QPen(Qt.red, 2))
             self.scene.addItem(line)
+    #cerrar ventana
     def closeEvent(self, event):
         self.scene.clear()
         event.accept()
+
 if __name__ == "__main__":
     app = QApplication([])
     ventana = GrafosWidget()

@@ -5,6 +5,7 @@ from PySide6.QtGui import QColor, QPalette,QPixmap
 from PySide6.QtWidgets import QApplication, QWidget, QHBoxLayout,QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox,QComboBox,QLabel
 from PySide6.QtCore import Qt
 
+# Clase de lista circular doblemente ligada
 class doubly_linked_list:
     class Nodo:
         def __init__(self, valor):
@@ -158,6 +159,8 @@ class ListaWidget(QWidget):
         self.setWindowTitle("Lista de reproducción")
         self.setGeometry(100,100,500,500)
         self.lista = doubly_linked_list()
+
+        # Layouts
         self.layout = QVBoxLayout()
         self.Hlayout1=QHBoxLayout()
         self.Hlayout2=QHBoxLayout()
@@ -192,7 +195,7 @@ class ListaWidget(QWidget):
         self.lista_rep = QListWidget()
         self.lista_rep.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;max-height: 350px;font-size: 15px;")
 
-        #layout
+        #Configuración de layout
         self.Hlayout2.addWidget(self.BAgregar)
         self.Hlayout2.addWidget(self.BEliminar)
         self.Hlayout3.addWidget(self.BSiguiente)
@@ -209,6 +212,7 @@ class ListaWidget(QWidget):
         self.Hlayout1.addWidget(self.lista_rep)
         self.setLayout(self.Hlayout1)
 
+    # Funciones de los botones
     def agregar_cancion(self):
         cancion, ok_cancion = QInputDialog.getText(self, "Agregar canción", "Nombre de la canción:")
         if ok_cancion and cancion:

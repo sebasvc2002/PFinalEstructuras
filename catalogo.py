@@ -43,6 +43,7 @@ class CatalogoWidget(QWidget):
         # Configuración de Vlayout
         self.setLayout(self.layout)
 
+    #Funciones de la lista
     def actualizar_pila(self):
         """Actualiza la lista gráfica de libros en la interfaz"""
         self.lista_libros.clear()
@@ -68,7 +69,6 @@ class CatalogoWidget(QWidget):
             QMessageBox.warning(self, "Error", "Debe ingresar un título válido.")
 
     def eliminar_libro(self):
-        """Elimina el libro seleccionado de la lista"""
         selected_item = self.lista_libros.currentRow()
         if selected_item >= 0:
             self.libros.pop(selected_item)
@@ -76,13 +76,13 @@ class CatalogoWidget(QWidget):
         else:
             QMessageBox.warning(self, "Eliminar Libro", "Seleccione un libro para eliminar.")
 
+    #Ordenar los libros por ISBN
     def ordenar_libros(self):
-        """Ordena los libros por ISBN"""
         self.libros.sort(key=lambda libro: libro["isbn"])
         self.actualizar_pila()
 
+    #Buscar libro a través de su ISBN
     def buscar_libro(self):
-        """Busca un libro por ISBN usando búsqueda binaria"""
         isbn, ok_isbn = QInputDialog.getText(self, "Buscar Libro", "ISBN del Libro:")
         if ok_isbn and isbn:
             try:
@@ -98,8 +98,8 @@ class CatalogoWidget(QWidget):
         else:
             QMessageBox.warning(self, "Error", "Debe ingresar un ISBN válido.")
 
+    #Búsqueda binaria de un libro
     def binary_search(self, isbn):
-        """Realiza una búsqueda binaria en la lista de libros por ISBN"""
         low, high = 0, len(self.libros) - 1
         while low <= high:
             mid = (low + high) // 2

@@ -8,7 +8,8 @@ class RecientesWidget(QWidget):
         super().__init__()
         self.setWindowTitle("Catálogo de Libros")
         self.setGeometry(100, 100, 500, 500)
-        # Lista para gestionar los libros como arreglos (listas)
+
+        # Creación de un arreglo para utilizar como pila
         self.acciones = []
 
         # Configuración de Vlayout
@@ -39,9 +40,10 @@ class RecientesWidget(QWidget):
         self.layout.addWidget(self.Pila_Libros)
 
 
-        # Configuración de Vlayout
+        # Configuración del layout
         self.setLayout(self.layout)
 
+    #Funciones de la pila
     def actualizar_lista(self):
         """Actualiza la lista gráfica de libros en la interfaz"""
         self.Pila_Libros.clear()
@@ -49,7 +51,6 @@ class RecientesWidget(QWidget):
             self.Pila_Libros.addItem(f"{self.acciones.index(libro)+1}. {libro['titulo']} - ISBN: {libro['isbn']} - {libro['accion']}")
 
     def agregar_accion(self):
-        """Agrega un libro a la lista"""
         titulo, ok_titulo = QInputDialog.getText(self, "Título", "Título del Libro:")
         if ok_titulo and titulo:
             isbn, ok_isbn = QInputDialog.getText(self, "Hacer registro", "ISBN del Libro:")
@@ -67,7 +68,6 @@ class RecientesWidget(QWidget):
             QMessageBox.warning(self, "Error", "Debe ingresar un título válido.")
 
     def borrar_accion(self):
-        """Elimina el libro seleccionado de la lista"""
         if len(self.acciones)==0:
             QMessageBox.warning(self, "Error", "No hay acciones para eliminar")
         else:

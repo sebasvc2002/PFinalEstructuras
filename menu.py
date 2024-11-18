@@ -293,7 +293,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.b1Menu.setText(QCoreApplication.translate("MainWindow", u"Menu principal", None))
+        self.b1Menu.setText(QCoreApplication.translate("MainWindow", u"Página principal", None))
         self.b2Catalogo.setText(QCoreApplication.translate("MainWindow", u"Cat\u00e1logo de libros", None))
         self.b3Acciones.setText(QCoreApplication.translate("MainWindow", u"Acciones recientes", None))
         self.b4Espera.setText(QCoreApplication.translate("MainWindow", u"Lista de espera", None))
