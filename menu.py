@@ -21,7 +21,7 @@ from PySide6.QtWidgets import (QApplication, QLabel, QMainWindow, QMenuBar,
 import resources_rc
 from arbol import ArbolBinarioWidget
 from catalogo import CatalogoWidget
-from Entregas import RecientesWidget
+from Recientes import RecientesWidget
 from Espera import EsperaWidget
 from lista import ListaWidget
 from Grafos import GrafosWidget

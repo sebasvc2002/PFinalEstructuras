@@ -1,9 +1,9 @@
 import sys
 from array import array
 
-from PySide6.QtGui import QColor, QPalette,QPixmap
+from PySide6.QtGui import QColor, QPalette,QPixmap,QIcon
 from PySide6.QtWidgets import QApplication, QWidget, QHBoxLayout,QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox,QComboBox,QLabel
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt,QSize
 
 # Clase de lista circular doblemente ligada
 class doubly_linked_list:
@@ -165,6 +165,7 @@ class ListaWidget(QWidget):
         self.Hlayout1=QHBoxLayout()
         self.Hlayout2=QHBoxLayout()
         self.Hlayout3 = QHBoxLayout()
+        self.infoLayout=QVBoxLayout()
         self.index=0
 
         #botones
@@ -195,6 +196,14 @@ class ListaWidget(QWidget):
         self.lista_rep = QListWidget()
         self.lista_rep.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;max-height: 350px;font-size: 15px;")
 
+        self.icon=QIcon("resources png/info.png")
+        self.bInfo = QPushButton("")
+        self.bInfo.setIcon(self.icon)
+        self.bInfo.setIconSize(QSize(35,35))
+        self.bInfo.clicked.connect(self.info)
+        self.bInfo.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
+
+
         #Configuración de layout
         self.Hlayout2.addWidget(self.BAgregar)
         self.Hlayout2.addWidget(self.BEliminar)
@@ -209,10 +218,16 @@ class ListaWidget(QWidget):
         self.layout.addSpacing(100)
         self.layout.alignment()
         self.Hlayout1.addLayout(self.layout)
-        self.Hlayout1.addWidget(self.lista_rep)
+
+        self.infoLayout.addWidget(self.bInfo)
+        self.infoLayout.addWidget(self.lista_rep)
+        self.Hlayout1.addLayout(self.infoLayout)
         self.setLayout(self.Hlayout1)
 
     # Funciones de los botones
+    def info(self):
+        QMessageBox.information(self, "Acerca de ", "Este es un reproductor de música\n1. Agregar las canciones deseadas seleccionando el botón ‘Agregar canción’\n2. Para eliminar una canción selecciona la canción de la lista y presiona el botón ‘Eliminar canción’")
+
     def agregar_cancion(self):
         cancion, ok_cancion = QInputDialog.getText(self, "Agregar canción", "Nombre de la canción:")
         if ok_cancion and cancion:

@@ -1,5 +1,7 @@
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox, QLabel
-from PySide6.QtCore import Qt
+from PyQt5.QtWidgets import QHBoxLayout
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout,QListWidget, QPushButton, QInputDialog, QMessageBox, QLabel
+from PySide6.QtCore import Qt, QSize
+from PySide6.QtGui import QIcon
 
 class CatalogoWidget(QWidget):
     def __init__(self):
@@ -12,13 +14,24 @@ class CatalogoWidget(QWidget):
 
         # Configuración de Vlayout
         self.layout = QVBoxLayout()
+        self.infoLayout=QHBoxLayout()
 
         # Botones
+        self.icon=QIcon("resources png/info.png")
+        self.bInfo = QPushButton("")
+        self.bInfo.clicked.connect(self.info)
+        self.bInfo.setIcon(self.icon)
+        self.bInfo.setIconSize(QSize(35,35))
+        self.bInfo.setMaximumWidth(40)
+        self.bInfo.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
+        self.infoLayout.addWidget(self.bInfo)
+
 
         self.btn_agregar = QPushButton("Agregar Libro")
         self.btn_agregar.clicked.connect(self.agregar_libro)
         self.btn_agregar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
-        self.layout.addWidget(self.btn_agregar)
+        self.infoLayout.addWidget(self.btn_agregar)
+        self.layout.addLayout(self.infoLayout)
 
         self.btn_eliminar = QPushButton("Eliminar Libro")
         self.btn_eliminar.clicked.connect(self.eliminar_libro)
@@ -111,6 +124,9 @@ class CatalogoWidget(QWidget):
             else:
                 high = mid - 1
         return -1
+
+    def info(self):
+        QMessageBox.information(self, "Acerca de", "1. Seleccionar una acción a realizar\n2. Ingresar el título del libro y su ISBN\n3. Visualizar la lista de libros")
 
 
 if __name__ == "__main__":

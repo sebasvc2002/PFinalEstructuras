@@ -1,8 +1,8 @@
 from PySide6.QtGui import QBrush, QPen
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QLineEdit, QGraphicsView, QGraphicsScene, \
-    QGraphicsEllipseItem, QMessageBox,QHBoxLayout
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QPainter, QPen, QColor
+    QGraphicsEllipseItem, QMessageBox,QHBoxLayout, QApplication
+from PySide6.QtCore import Qt, QSize
+from PySide6.QtGui import QPainter, QPen, QColor, QIcon
 
 
 class NodoArbol:
@@ -18,15 +18,24 @@ class ArbolBinarioWidget(QWidget):
         self.setFixedSize(550, 500)
         self.raiz_arbol = None  # Root of the binary tree
 
+
+        self.icon=QIcon("resources png/info.png")
         # Layouts
         self.layout = QVBoxLayout()
         self.layouth=QHBoxLayout()
         self.layouth1=QHBoxLayout()
+        self.layoutInfo=QHBoxLayout()
 
         # Añadir nodos
         self.input_field = QLineEdit()
         self.input_field.setPlaceholderText("Introduce valor")
         self.input_field.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;min-height: 40px;font-size: 15px;")
+        self.bInfo = QPushButton("")
+        self.bInfo.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
+        self.bInfo.setIcon(self.icon)
+        self.bInfo.setIconSize(QSize(35,35))
+
+
 
         # Botones
         self.bAgregar = QPushButton("Añadir nodo")
@@ -50,6 +59,7 @@ class ArbolBinarioWidget(QWidget):
         self.graphics_view.setFixedSize(535, 450)
 
         # Conectar botones
+        self.bInfo.clicked.connect(self.info)
         self.bAgregar.clicked.connect(self.nuevo_nodo)
         self.BEliminar.clicked.connect(self.borrar_nodo)
         self.BBuscar.clicked.connect(self.buscar_nodo)
@@ -59,7 +69,9 @@ class ArbolBinarioWidget(QWidget):
 
         # Organización del layout
         self.layout.addSpacing(25)
-        self.layout.addWidget(self.input_field)
+        self.layoutInfo.addWidget(self.input_field)
+        self.layoutInfo.addWidget(self.bInfo)
+        self.layout.addLayout(self.layoutInfo)
         self.layouth.addWidget(self.bAgregar)
         self.layouth.addWidget(self.BEliminar)
         self.layouth.addWidget(self.BBuscar)
@@ -75,6 +87,8 @@ class ArbolBinarioWidget(QWidget):
         self.setLayout(self.layout)
 
     #Funciones de los botones
+    def info(self):
+        QMessageBox.information(self, "Acerca de","1. Ingresar un valor en el campo de texto\n2. Seleccionar la acción a realizar\n3. Visualizar el árbol binario")
     def nuevo_nodo(self):
         value = self.input_field.text().strip()
         if value:
@@ -200,3 +214,8 @@ class ArbolBinarioWidget(QWidget):
                 right_y = y + 50
                 self.scene.addLine(x, y, right_x, right_y, pen)  # Use pen here
                 self._dibujar_Arbol(node.right, right_x, right_y, x_offset // 2)
+if __name__ == "__main__":
+    app = QApplication([])
+    ventana = ArbolBinarioWidget()
+    ventana.show()
+    app.exec()

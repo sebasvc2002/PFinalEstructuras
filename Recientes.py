@@ -1,6 +1,6 @@
-from PySide6.QtGui import QColor, QPalette
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox,QComboBox
-from PySide6.QtCore import Qt
+from PySide6.QtGui import QColor, QPalette, QBrush, QIcon
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox,QComboBox, QHBoxLayout
+from PySide6.QtCore import Qt,QSize
 
 
 class RecientesWidget(QWidget):
@@ -14,25 +14,39 @@ class RecientesWidget(QWidget):
 
         # Configuración de Vlayout
         self.layout = QVBoxLayout()
+        self.infoLayout=QHBoxLayout()
         self.layout.addSpacing(15)
 
 
         # Botones
+        self.icon=QIcon("resources png/info.png")
+        self.bInfo = QPushButton("")
+        self.bInfo.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
+        self.bInfo.setIcon(self.icon)
+        self.bInfo.setIconSize(QSize(35,35))
+        self.bInfo.clicked.connect(self.info)
+        self.infoLayout.addWidget(self.bInfo)
+        self.bInfo.setMaximumWidth(50)
+
         self._tipoAccion = QComboBox()
         self._tipoAccion.addItem("Check-in")
         self._tipoAccion.addItem("Check-out")
         self._tipoAccion.addItem("Perdido")
         self._tipoAccion.addItem("Dañado")
         self._tipoAccion.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;min-height: 40px;font-size: 15px;")
-        self.layout.addWidget(self._tipoAccion)
+        self.infoLayout.addWidget(self._tipoAccion)
+        self.layout.addLayout(self.infoLayout)
+
         self.btn_agregar = QPushButton("Agregar Libro")
         self.btn_agregar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.btn_agregar.clicked.connect(self.agregar_accion)
         self.layout.addWidget(self.btn_agregar)
+
         self.btn_eliminar = QPushButton("Eliminar acción más reciente")
         self.btn_eliminar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.btn_eliminar.clicked.connect(self.borrar_accion)
         self.layout.addWidget(self.btn_eliminar)
+
         # Crear lista gráfica
         self.Pila_Libros = QListWidget()
         self.Pila_Libros.setStyleSheet("background-color: rgb(40,40,40); color: white;border-radius: 10px;max-height: 350px;font-size: 15px;")
@@ -44,6 +58,9 @@ class RecientesWidget(QWidget):
         self.setLayout(self.layout)
 
     #Funciones de la pila
+    def info(self):
+        QMessageBox.information(self, "Acerca de ","1. Seleccionar acción de la lista desplegable\n2. Seleccionar 'Agregar Libro'\n3. Seleccionar 'Eliminar acción más reciente' en caso de haberse equivocado")
+
     def actualizar_lista(self):
         """Actualiza la lista gráfica de libros en la interfaz"""
         self.Pila_Libros.clear()

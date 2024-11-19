@@ -1,9 +1,11 @@
 import sys
+
+from PyQt5.QtWidgets import QHBoxLayout
 from PySide6.QtWidgets import (
-    QApplication, QDialog,QWidget, QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem, QGraphicsLineItem
+    QApplication, QDialog,QWidget, QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem, QGraphicsLineItem, QHBoxLayout
 )
-from PySide6.QtGui import QPen, QColor
-from PySide6.QtCore import Qt, QPointF
+from PySide6.QtGui import QPen, QColor, QIcon
+from PySide6.QtCore import Qt, QPointF, QSize
 import math
 
 class Grafos:
@@ -66,12 +68,22 @@ class GrafosWidget(QWidget):
 
         # Layouts
         self.lista = QListWidget()
+        self.infoLayout=QHBoxLayout()
         self.layout.addWidget(self.lista)
 
         # Botones
+        self.Icon=QIcon("resources png/info.png")
+        self.bInfo = QPushButton("")
+        self.bInfo.setIcon(self.Icon)
+        self.bInfo.setIconSize(QSize(35,35))
+        self.bInfo.setMaximumWidth(50)
+        self.bInfo.clicked.connect(self.info)
+        self.infoLayout.addWidget(self.bInfo)
+
         self.btn_agregar = QPushButton("Agregar destino")
         self.btn_agregar.clicked.connect(self.agregar_arista)
-        self.layout.addWidget(self.btn_agregar)
+        self.infoLayout.addWidget(self.btn_agregar)
+        self.layout.addLayout(self.infoLayout)
 
         self.btn_calcular = QPushButton("Calcular costo mínimo")
         self.btn_calcular.clicked.connect(self.calcularKruskal)
@@ -130,6 +142,9 @@ class GrafosWidget(QWidget):
     def visualizar_grafo(self):
         dialog = GraphDialog(self.node_positions, self.grafo.grafo, getattr(self, 'mst_edges', []))
         dialog.exec()
+
+    def info(self):
+        QMessageBox.information(self, "Acerca de", "1. Seleccionar el botón 'agregar destino'\n2. Elegir casa de origen\n3. Elegir casa destino\n4. Agregar distancia\n5. Seleccionar 'calcular costo mínimo' para obtener el recorrido más eficiente\n6. Seleccionar 'visualizar grafo' para ver el grafo")
 
 #Visualizar grafo
 class GraphDialog(QDialog):

@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox,QComboBox, QLabel,QHBoxLayout
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QSize
+from PySide6.QtGui import QIcon
 from collections import deque
 class EsperaWidget(QWidget):
     def __init__(self):
@@ -31,6 +32,15 @@ class EsperaWidget(QWidget):
         self.BGo.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
         self.HLayout.addWidget(self.BGo)
         self.Vlayout.addLayout(self.HLayout)
+
+        self.BInfo = QPushButton("")
+        self.BInfo.clicked.connect(self.info)
+        self.icon=QIcon("resources png/info.png")
+        self.BInfo.setIcon(self.icon)
+        self.BInfo.setIconSize(QSize(35,35))
+        self.BInfo.setMaximumWidth(40)
+        self.BInfo.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
+        self.HLayout.addWidget(self.BInfo)
 
         self.BAgregar = QPushButton("Agregar persona a la cola")
         self.BAgregar.clicked.connect(self.agregar_persona)
@@ -122,6 +132,9 @@ class EsperaWidget(QWidget):
         self.ColaLibros.clear()
         for persona in self.CurrentEspera:
             self.ColaLibros.addItem(f"{self.CurrentEspera.index(persona)+1}. {persona}")
+
+    def info(self):
+        QMessageBox.information(self, "Acerca de", "1. Seleccionar un libro de la lista\n2. Agregar el nombre de la persona a la cola\n3. Cuando esté disponible el libro, removerlo de la cola presionando el botón 'Atender persona'")
 if __name__ == "__main__":
     app = QApplication([])
     ventana = EsperaWidget()
