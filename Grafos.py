@@ -1,8 +1,7 @@
 import sys
 
-from PyQt5.QtWidgets import QHBoxLayout
 from PySide6.QtWidgets import (
-    QApplication, QDialog,QWidget, QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem, QGraphicsLineItem, QHBoxLayout
+    QApplication, QDialog,QWidget, QVBoxLayout,QHBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem, QGraphicsLineItem, QHBoxLayout
 )
 from PySide6.QtGui import QPen, QColor, QIcon
 from PySide6.QtCore import Qt, QPointF, QSize
