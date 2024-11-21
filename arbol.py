@@ -51,12 +51,18 @@ class ArbolBinarioWidget(QWidget):
         self.bPostorden = QPushButton("Postorden")
         self.bPostorden.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
 
-        # Tree Visualización del árbol binario
+        # Visualización del árbol binario
         self.scene = QGraphicsScene()
         self.graphics_view = QGraphicsView(self.scene)
         self.graphics_view.setRenderHint(QPainter.Antialiasing)
         self.scene.setBackgroundBrush(QBrush(QColor("#8b8b8b")))
         self.graphics_view.setFixedSize(535, 450)
+
+        #Habilitar scroll del árbol
+        self.graphics_view.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.graphics_view.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.scene.setSceneRect(0, 0, 1000, 1000)
+
 
         # Conectar botones
         self.bInfo.clicked.connect(self.info)
