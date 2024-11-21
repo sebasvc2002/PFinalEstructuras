@@ -4,6 +4,9 @@ Proyecto final Estructuras de datos
 Dependencias
 ------------
 - PySide6
+```python
+pip install PySide6
+```
 - deque
 Uso de conceptos de clase
 -------------------------
@@ -11,5 +14,5 @@ Uso de conceptos de clase
 - *Entregas* recientes - pilas (terminado)
 - *Lista de espera* - Colas (terminado)
 - *Historial de préstamos* - lista doblemente ligada
-- *Grafos* - (pendiente)
+- *Grafos* - (terminado)
 - *Arboles* - (terminado)
