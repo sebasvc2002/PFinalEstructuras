@@ -297,7 +297,7 @@ class Ui_MainWindow(object):
         self.b2Catalogo.setText(QCoreApplication.translate("MainWindow", u"Cat\u00e1logo de libros", None))
         self.b3Acciones.setText(QCoreApplication.translate("MainWindow", u"Acciones recientes", None))
         self.b4Espera.setText(QCoreApplication.translate("MainWindow", u"Lista de espera", None))
-        self.b6Grafos.setText(QCoreApplication.translate("MainWindow", u"Grafos", None))
+        self.b6Grafos.setText(QCoreApplication.translate("MainWindow", u"Entregas", None))
         self.b5Reproduccion.setText(QCoreApplication.translate("MainWindow", u"Lista de reproducción", None))
         self.b7Arboles.setText(QCoreApplication.translate("MainWindow", u"\u00c1rboles", None))
         self.b8Salir.setText(QCoreApplication.translate("MainWindow", u"Salir", None))

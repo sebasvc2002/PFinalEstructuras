@@ -1,9 +1,9 @@
 import sys
 
 from PySide6.QtWidgets import (
-    QApplication, QDialog,QWidget, QVBoxLayout,QHBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem, QGraphicsLineItem, QHBoxLayout
+    QApplication, QDialog,QWidget, QVBoxLayout,QHBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox, QGraphicsView, QGraphicsScene, QGraphicsTextItem, QGraphicsLineItem,QGraphicsPixmapItem
 )
-from PySide6.QtGui import QPen, QColor, QIcon
+from PySide6.QtGui import QPen, QColor, QIcon,QPixmap
 from PySide6.QtCore import Qt, QPointF, QSize
 import math
 
@@ -116,16 +116,16 @@ class GrafosWidget(QWidget):
             v, ok_v = QInputDialog.getInt(self, "Agregar Destino", "Número de casa (0-6):", 0, 0, 6)
             if not ok_v:
                 return
-            w, ok_w = QInputDialog.getInt(self, "Agregar Arista", "Peso:", 0, 0)
+            w, ok_w = QInputDialog.getInt(self, "Agregar distancia", "Distancia:", 0, 0)
             if not ok_w:
                 return
 
             if u == v:
-                QMessageBox.warning(self, "Error", "No se puede agregar un bucle.")
+                QMessageBox.warning(self, "Error", "No se puede agregar un ciclo.")
                 return
 
             self.grafo.addEdge(u, v, w)
-            self.lista.addItem(f"Arista {u} -- {v} con peso {w}")
+            self.lista.addItem(f"Origen: Casa {u} -- Destino: Casa {v} con distancia {w}km")
 
         except ValueError:
             QMessageBox.critical(self, "Error", "Entrada inválida.")
@@ -133,9 +133,9 @@ class GrafosWidget(QWidget):
     def calcularKruskal(self):
         self.lista.clear()
         result, cost = self.grafo.Kruskal()
-        self.lista.addItem(f"Costo total del MST: {cost}")
+        self.lista.addItem(f"Distancia total: {cost}")
         for u, v, w in result:
-            self.lista.addItem(f"Arista {u} -- {v} con peso {w}")
+            self.lista.addItem(f"Origen: Casa {u}- Destino: Casa {v} con distancia {w}")
         self.mst_edges = result
 
     def visualizar_grafo(self):
@@ -160,6 +160,7 @@ class GraphDialog(QDialog):
         self.scene = QGraphicsScene()
         self.view.setScene(self.scene)
         self.layout.addWidget(self.view)
+        self.view.setStyleSheet("background-color: rgb(43,45,48)")
 
         self.node_positions = node_positions
         self.edges = edges
@@ -168,12 +169,16 @@ class GraphDialog(QDialog):
         self.dibujar_Grafo()
 
     def dibujar_Grafo(self):
+        node_image = QPixmap("resources png/home.png")  # Replace with the path to your image
+
         for i, (x, y) in enumerate(self.node_positions):
-            node = QGraphicsEllipseItem(x - 10, y - 10, 20, 20)
-            node.setBrush(Qt.white)
+            node = QGraphicsPixmapItem(node_image)
+            node.setPos(x - node_image.width() / 2, y - node_image.height() / 2)
             self.scene.addItem(node)
-            label = self.scene.addText(str(i))
+            label = QGraphicsTextItem(str(i))
+            label.setDefaultTextColor(Qt.black)
             label.setPos(x - 5, y - 10)
+            self.scene.addItem(label)
 
         for u, v, w in self.edges:
             x1, y1 = self.node_positions[u]
