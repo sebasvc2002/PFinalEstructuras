@@ -1,3 +1,5 @@
+#Autor Sebastián Velasco Cantú
+
 import sys
 
 from menu import Ui_MainWindow

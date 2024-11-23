@@ -1,3 +1,5 @@
+#Autor Sebastián Velasco Cantú
+
 from menu import Ui_MainWindow
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton
 

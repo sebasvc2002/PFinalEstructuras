@@ -1,3 +1,5 @@
+#Autor Sebastián Velasco Cantú
+
 from PySide6.QtGui import QBrush, QPen
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QLineEdit, QGraphicsView, QGraphicsScene, \
     QGraphicsEllipseItem, QMessageBox,QHBoxLayout, QApplication

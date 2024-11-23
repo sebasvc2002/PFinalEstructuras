@@ -1,3 +1,5 @@
+#Autor Sebastián Velasco Cantú
+
 from PySide6.QtGui import QColor, QPalette, QBrush, QIcon
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox,QComboBox, QHBoxLayout
 from PySide6.QtCore import Qt,QSize

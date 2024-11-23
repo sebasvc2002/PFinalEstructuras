@@ -1,3 +1,5 @@
+#Autor Sebastián Velasco Cantú
+
 # Resource object code (Python 3)
 # Created by: object code
 # Created by: The Resource Compiler for Qt version 6.8.0

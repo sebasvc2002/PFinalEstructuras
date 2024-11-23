@@ -1,3 +1,5 @@
+#Autor Sebastián Velasco Cantú
+
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QListWidget, QPushButton, QInputDialog, QMessageBox,QComboBox, QLabel,QHBoxLayout
 from PySide6.QtCore import Qt, QSize
 from PySide6.QtGui import QIcon

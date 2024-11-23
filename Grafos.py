@@ -1,3 +1,4 @@
+#Autor Sebastián Velasco Cantú
 import sys
 
 from PySide6.QtWidgets import (
