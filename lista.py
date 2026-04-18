@@ -158,7 +158,7 @@ class doubly_linked_list:
 class ListaWidget(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Lista de reproducción")
+        self.setWindowTitle("Historial de préstamos")
         self.setGeometry(100,100,500,500)
         self.lista = doubly_linked_list()
 
@@ -171,26 +171,26 @@ class ListaWidget(QWidget):
         self.index=0
 
         #botones
-        self.player=QLabel("Reproductor")
-        self.pixmap=QPixmap("resources png/Music.png")
+        self.player=QLabel("Historial")
+        self.pixmap=QPixmap("resources png/history.png")
         self.pixmap=self.pixmap.scaled(100,100,Qt.KeepAspectRatio)
         self.player.setPixmap(self.pixmap)
         self.player.setAlignment(Qt.AlignCenter)
-        self.Actual=QLabel("Canción actual:")
+        self.Actual=QLabel("Préstamo actual:")
         self.Actual.setAlignment(Qt.AlignCenter)
         self.CActual=QLabel("Ninguna")
 
-        self.BAgregar = QPushButton("Agregar canción")
-        self.BAgregar.clicked.connect(self.agregar_cancion)
+        self.BAgregar = QPushButton("Agregar préstamo")
+        self.BAgregar.clicked.connect(self.agregar_libro)
         self.BAgregar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
-        self.BEliminar = QPushButton("Eliminar canción")
-        self.BEliminar.clicked.connect(self.eliminar_cancion)
+        self.BEliminar = QPushButton("Eliminar préstamo")
+        self.BEliminar.clicked.connect(self.eliminar_libro)
         self.BEliminar.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
-        self.BSiguiente = QPushButton("Siguiente canción")
-        self.BSiguiente.clicked.connect(self.siguiente_cancion)
+        self.BSiguiente = QPushButton("Siguiente préstamo")
+        self.BSiguiente.clicked.connect(self.siguiente_libro)
         self.BSiguiente.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
-        self.BAnterior = QPushButton("Canción anterior")
-        self.BAnterior.clicked.connect(self.cancion_anterior)
+        self.BAnterior = QPushButton("Préstamo anterior")
+        self.BAnterior.clicked.connect(self.libro_anterior)
         self.BAnterior.setStyleSheet("QPushButton{background-color: rgb(63,63,63); color: white;border-radius: 10px;font-size: 15px;min-height: 40px;}QPushButton:hover{border: 2px solid rgb(255,255,255);}")
 
 
@@ -228,26 +228,26 @@ class ListaWidget(QWidget):
 
     # Funciones de los botones
     def info(self):
-        QMessageBox.information(self, "Acerca de ", "Este es un reproductor de música\n1. Agregar las canciones deseadas seleccionando el botón ‘Agregar canción’\n2. Para eliminar una canción selecciona la canción de la lista y presiona el botón ‘Eliminar canción’")
+        QMessageBox.information(self, "Acerca de ", "Este es un historial de préstamos\n1. Agregar los libros deseados seleccionando el botón ‘Agregar préstamo’\n2. Para eliminar un préstamo selecciona el préstamo de la lista y presiona el botón ‘Eliminar préstamo’")
 
-    def agregar_cancion(self):
-        cancion, ok_cancion = QInputDialog.getText(self, "Agregar canción", "Nombre de la canción:")
-        if ok_cancion and cancion:
-            autor, ok_autor = QInputDialog.getText(self, "Agregar canción", "Nombre del autor:")
+    def agregar_libro(self):
+        libro, ok_libro = QInputDialog.getText(self, "Agregar préstamo", "Nombre del libro:")
+        if ok_libro and libro:
+            usuario, ok_usuario = QInputDialog.getText(self, "Agregar préstamo", "Nombre del usuario:")
             try:
-                self.lista.append({"cancion": cancion, "autor": autor})
+                self.lista.append({"libro": libro, "usuario": usuario})
                 self.actualizar_lista()
             except ValueError:
                 QMessageBox.critical(self, "Error", "El nombre debe ser texto")
-    def eliminar_cancion(self):
+    def eliminar_libro(self):
         selectedItem=self.lista_rep.currentRow()
         if selectedItem>=0:
             self.lista.remove(selectedItem)
             self.actualizar_lista()
             self.index=0
         else:
-            QMessageBox.warning(self, "Error", "Debe seleccionar una canción")
-    def siguiente_cancion(self):
+            QMessageBox.warning(self, "Error", "Debe seleccionar un préstamo")
+    def siguiente_libro(self):
         nodo=None
         try:
             self.index=(self.index+1)%self.lista.size
@@ -255,10 +255,10 @@ class ListaWidget(QWidget):
         except ZeroDivisionError:
             pass
         if nodo is not None:
-            self.CActual.setText(f"{nodo.valor['cancion']} - {nodo.valor['autor']}")
+            self.CActual.setText(f"{nodo.valor['libro']} - {nodo.valor['usuario']}")
         else:
             self.CActual.setText("Ninguna")
-    def cancion_anterior(self):
+    def libro_anterior(self):
         nodo=None
         try:
             self.index = (self.index - 1) % self.lista.size
@@ -267,17 +267,17 @@ class ListaWidget(QWidget):
             pass
 
         if nodo is not None:
-            self.CActual.setText(f"{nodo.valor['cancion']} - {nodo.valor['autor']}")
+            self.CActual.setText(f"{nodo.valor['libro']} - {nodo.valor['usuario']}")
         else:
             self.CActual.setText("Ninguna")
     def actualizar_lista(self):
         self.lista_rep.clear()
         for i in range(self.lista.size):
             nodo=self.lista.get(i)
-            self.lista_rep.addItem(f"{i+1}. {nodo.valor['cancion']} - {nodo.valor['autor']}")
+            self.lista_rep.addItem(f"{i+1}. {nodo.valor['libro']} - {nodo.valor['usuario']}")
         if self.lista.size>0:
             nodo=self.lista.get(self.index)
-            self.CActual.setText(f"{nodo.valor['cancion']} - {nodo.valor['autor']}")
+            self.CActual.setText(f"{nodo.valor['libro']} - {nodo.valor['usuario']}")
         else:
             self.CActual.setText("Ninguna")
 
